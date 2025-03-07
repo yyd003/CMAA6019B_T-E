@@ -3,11 +3,13 @@ import Gallery from '../../components/Gallery';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import projects from '../../data/projects';
-import { useTheme } from '../../contexts/ThemeContext';
+// 移除 useTheme 导入，因为我们不再需要它
+// import { useTheme } from '../../contexts/ThemeContext';
+import useClickPosition from '../../hooks/useClickPosition';
 
 function Home() {
-    // 使用全局主题上下文
-    const { theme, toggleTheme } = useTheme();
+    // 移除未使用的 theme 和 toggleTheme
+    // const { theme, toggleTheme } = useTheme();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -16,7 +18,10 @@ function Home() {
     const [hoveredElement, setHoveredElement] = useState(null);
     const homeContainerRef = useRef(null);
 
-    // 移除本地主题状态和相关逻辑，使用全局主题
+    // Use our custom hook for different sections
+    const heroSection = useClickPosition('Hero Section');
+    const aboutSection = useClickPosition('About Section');
+    const projectsSection = useClickPosition('Projects Section');
 
     // 添加通用元素监听功能
     useEffect(() => {
@@ -106,16 +111,21 @@ function Home() {
     return (
         <div className="home-container" ref={homeContainerRef}>
             {/* 移除主题切换按钮 */}
-            <section className="hero">
+            <section className="hero" ref={heroSection.ref}>
                 <audio 
                     src="/audio/j.fla-Payphone.mp3" 
                     autoPlay 
                     loop 
                     controls 
                 />
+                {/* Display click position for demonstration */}
+                <p className="click-info">
+                    Last click in Hero: X: {Math.round(heroSection.clickPosition.x)}, 
+                    Y: {Math.round(heroSection.clickPosition.y)}
+                </p>
             </section>
 
-            <section className="about">
+            <section className="about" ref={aboutSection.ref}>
                 <h2>About Me</h2>
                 <p>I am a passionate developer focused on full-stack development and AI applications.</p>
                 <div className="skills">
@@ -126,9 +136,14 @@ function Home() {
                         <li>Others: Git, Docker</li>
                     </ul>
                 </div>
+                {/* Display click position for demonstration */}
+                <p className="click-info">
+                    Last click in About: X: {Math.round(aboutSection.clickPosition.x)}, 
+                    Y: {Math.round(aboutSection.clickPosition.y)}
+                </p>
             </section>
 
-            <section className="featured-projects">
+            <section className="featured-projects" ref={projectsSection.ref}>
                 <h2>Featured Projects</h2>
                 <div className="project-gallery">
                     <button 
