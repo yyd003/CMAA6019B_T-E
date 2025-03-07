@@ -44,3 +44,35 @@
 .social-links a:hover {
     color: #007bff;
 }
+
+.counter-demo {
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 1px solid #eaeaea;
+}
+
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.counter-demo p,h4{
+    color: #666;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+.counter-container button {
+    padding: 8px 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.counter-container button:hover {
+    background-color: #357ab8;
+}
