@@ -51,8 +51,8 @@ function Sidebar() {
                 <div className="font-size-buttons">
                     <p>Font Size: {fontSize.toFixed(1)}x</p>
                     <div className="button-group">
-                        <button onClick={decreaseFontSize}>Decrease</button>
-                        <button onClick={increaseFontSize}>Increase</button>
+                        <button onClick={decreaseFontSize}>A-</button>
+                        <button onClick={increaseFontSize}>A+</button>
                     </div>
                 </div>
             </div>

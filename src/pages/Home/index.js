@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Gallery from '../../components/Gallery';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import projects from '../../data/projects';
+// 修改导入路径，从Projects组件导入项目数据
+import { projectsList } from '../Projects';
 // 移除 useTheme 导入，因为我们不再需要它
 // import { useTheme } from '../../contexts/ThemeContext';
 import useClickPosition from '../../hooks/useClickPosition';
@@ -37,11 +38,11 @@ function Home() {
                                tagName;
             
             setHoveredElement(elementInfo);
-            console.log(`鼠标进入元素: ${elementInfo}`);
+            console.log(`Mouse entered element: ${elementInfo}`);
         };
 
         const handleMouseLeave = (e) => {
-            console.log(`鼠标离开元素: ${hoveredElement}`);
+            console.log(`Mouse left element: ${hoveredElement}`);
             setHoveredElement(null);
         };
 
@@ -59,18 +60,17 @@ function Home() {
         };
     }, [hoveredElement]);
 
-    // 项目数据已移至 src/data/projects.js
+    // 项目数据已从 Projects 组件导入
     
     // Implement automatic carousel with pause on user interaction
     useEffect(() => {
         if (isPaused) return;
         
         const interval = setInterval(() => {
-            setCurrentIndex(prevIndex => (prevIndex + 1) % projects.length);
+            setCurrentIndex(prevIndex => (prevIndex + 1) % projectsList.length);
         }, 10000); // Move every 10 seconds
         
         return () => clearInterval(interval);
-    // 移除 projects.length 依赖项，只保留 isPaused
     }, [isPaused]);
     
     // Temporarily pause automatic cycling when user interacts
@@ -88,25 +88,25 @@ function Home() {
     const goToLeft = () => {
         handleUserInteraction();
         setCurrentIndex(prevIndex => 
-            prevIndex === 0 ? projects.length - 1 : prevIndex - 1
+            prevIndex === 0 ? projectsList.length - 1 : prevIndex - 1
         );
     };
 
     const goToRight = () => {
         handleUserInteraction();
         setCurrentIndex(prevIndex => 
-            (prevIndex + 1) % projects.length
+            (prevIndex + 1) % projectsList.length
         );
     };
 
     // Calculate visible projects for carousel with looping
     const visibleProjects = [];
     for (let i = 0; i < 3; i++) {
-        const index = (currentIndex + i) % projects.length;
-        visibleProjects.push(projects[index]);
+        const index = (currentIndex + i) % projectsList.length;
+        visibleProjects.push(projectsList[index]);
     }
     
-    const displayedProjects = showAllProjects ? projects : projects.slice(0, 3);
+    const displayedProjects = showAllProjects ? projectsList : projectsList.slice(0, 3);
 
     return (
         <div className="home-container" ref={homeContainerRef}>
