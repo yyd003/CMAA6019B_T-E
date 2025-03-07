@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import Gallery from '../../components/Gallery';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import projects from '../../data/projects';
 
 function Home() {
     const [theme, setTheme] = useState('light');
@@ -19,48 +20,7 @@ function Home() {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
 
-    const projects = [
-        { 
-            path: "/projects/degas", 
-            name: "DEGAS", 
-            desc: "Deep Learning Project",
-            author: "Yao-Dong Yang",
-            image: "/img/bg.jpg",
-            description: "A deep learning project focused on computer vision and artificial intelligence.",
-            fullDescription: "DEGAS (Deep Learning Enhanced Graphics and Analysis System) is an innovative project that combines state-of-the-art deep learning techniques with practical applications in computer vision. This project demonstrates the power of AI in solving complex visual recognition tasks.",
-            sourceLink: "https://github.com/yourusername/degas"
-        },
-        { 
-            path: "/projects/react-demo", 
-            name: "React Demo", 
-            desc: "Interactive Components",
-            author: "Yao-Dong Yang",
-            image: "/img/bg.jpg",
-            description: "A collection of interactive React components.",
-            fullDescription: "Showcase of various React components demonstrating modern web development practices and UI/UX patterns.",
-            sourceLink: "https://github.com/yourusername/react-demo"
-        },
-        { 
-            path: "/projects/course-platform", 
-            name: "Course Platform", 
-            desc: "Educational System",
-            author: "Yao-Dong Yang",
-            image: "/img/bg.jpg",
-            description: "An online learning platform built with React.",
-            fullDescription: "A comprehensive educational platform featuring course management, student tracking, and interactive learning materials.",
-            sourceLink: "https://github.com/yourusername/course-platform"
-        },
-        { 
-            path: "/projects/coming-soon", 
-            name: "Future Projects", 
-            desc: "More Coming Soon",
-            author: "Yao-Dong Yang",
-            image: "/img/bg.jpg",
-            description: "Exciting new projects in development.",
-            fullDescription: "Stay tuned for more innovative projects combining AI, web development, and educational technology.",
-            sourceLink: null
-        }
-    ];
+    // 项目数据已移至 src/data/projects.js
     
     // Implement automatic carousel with pause on user interaction
     useEffect(() => {
@@ -71,7 +31,8 @@ function Home() {
         }, 10000); // Move every 10 seconds
         
         return () => clearInterval(interval);
-    }, [projects.length, isPaused]);
+    // 移除 projects.length 依赖项，只保留 isPaused
+    }, [isPaused]);
     
     // Temporarily pause automatic cycling when user interacts
     const handleUserInteraction = () => {
