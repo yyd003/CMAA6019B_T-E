@@ -11,6 +11,7 @@ function Header() {
             <nav>
                 <Link to="/">Home</Link>
                 <Link to="/projects">Projects</Link>
+                <Link to="/gallery">Gallery</Link>
                 <Link to="/contact">Contact</Link>
             </nav>
             <button className="theme-toggle" onClick={toggleTheme}>
