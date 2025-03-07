@@ -10,10 +10,13 @@ import ReactDemo from '../../pages/ProjectPages/ReactDemo';
 import Degas from '../../pages/ProjectPages/Degas';
 import CoursePlatform from '../../features/CoursePlatform';
 import './PortfolioLayout.css';
+import { useFontSize } from '../../contexts/FontSizeContext';
 
 function PortfolioLayout() {
+  const { fontSize } = useFontSize();
+  
   return (
-    <div className="portfolio-container">
+    <div className="portfolio-container" style={{ fontSize: `${fontSize}rem` }}>
       <Sidebar />
       <div className="main-wrapper">
         <Header />
@@ -30,7 +33,7 @@ function PortfolioLayout() {
                 <p>More exciting projects are on the way. Stay tuned!</p>
               </section>
             } />
-            <Route path="/contact" element={<Contact />} />  {}
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />
