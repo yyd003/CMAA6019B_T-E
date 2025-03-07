@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Gallery from '../../components/Gallery';
 import { Link } from 'react-router-dom';
 import './Home.css';
@@ -9,6 +9,10 @@ function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
+    
+    // 添加监听状态和引用
+    const [hoveredElement, setHoveredElement] = useState(null);
+    const homeContainerRef = useRef(null);
 
     const toggleTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -19,6 +23,42 @@ function Home() {
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
+
+    // 添加通用元素监听功能
+    useEffect(() => {
+        const container = homeContainerRef.current;
+        
+        const handleMouseEnter = (e) => {
+            const tagName = e.target.tagName.toLowerCase();
+            const className = e.target.className;
+            const id = e.target.id;
+            
+            const elementInfo = id ? `#${id}` : 
+                               className ? `.${className.split(' ')[0]}` : 
+                               tagName;
+            
+            setHoveredElement(elementInfo);
+            console.log(`鼠标进入元素: ${elementInfo}`);
+        };
+
+        const handleMouseLeave = (e) => {
+            console.log(`鼠标离开元素: ${hoveredElement}`);
+            setHoveredElement(null);
+        };
+
+        // 为容器内的所有元素添加事件委托
+        if (container) {
+            container.addEventListener('mouseover', handleMouseEnter);
+            container.addEventListener('mouseout', handleMouseLeave);
+        }
+
+        return () => {
+            if (container) {
+                container.removeEventListener('mouseover', handleMouseEnter);
+                container.removeEventListener('mouseout', handleMouseLeave);
+            }
+        };
+    }, [hoveredElement]);
 
     // 项目数据已移至 src/data/projects.js
     
@@ -70,7 +110,7 @@ function Home() {
     const displayedProjects = showAllProjects ? projects : projects.slice(0, 3);
 
     return (
-        <div className="home-container">
+        <div className="home-container" ref={homeContainerRef}>
             <button className="theme-toggle" onClick={toggleTheme}>
                 {theme === 'light' ? '🌙' : '☀️'}
             </button>
