@@ -1,21 +1,29 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
-export function ThemeProvider({ children }) {
-    const [isDarkMode, setIsDarkMode] = useState(true);
+function ThemeProvider({ children }) {
+    const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
     };
 
+    // 当主题变化时，更新 document 的 data-theme 属性
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
     return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
 }
 
-export function useTheme() {
+function useTheme() {
     return useContext(ThemeContext);
 }
+
+export { ThemeProvider, useTheme };

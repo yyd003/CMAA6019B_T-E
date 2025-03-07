@@ -3,9 +3,11 @@ import Gallery from '../../components/Gallery';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import projects from '../../data/projects';
+import { useTheme } from '../../contexts/ThemeContext';
 
 function Home() {
-    const [theme, setTheme] = useState('light');
+    // 使用全局主题上下文
+    const { theme, toggleTheme } = useTheme();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -14,15 +16,7 @@ function Home() {
     const [hoveredElement, setHoveredElement] = useState(null);
     const homeContainerRef = useRef(null);
 
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-    };
-
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-    }, [theme]);
+    // 移除本地主题状态和相关逻辑，使用全局主题
 
     // 添加通用元素监听功能
     useEffect(() => {
@@ -111,9 +105,7 @@ function Home() {
 
     return (
         <div className="home-container" ref={homeContainerRef}>
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === 'light' ? '🌙' : '☀️'}
-            </button>
+            {/* 移除主题切换按钮 */}
             <section className="hero">
                 <audio 
                     src="/audio/j.fla-Payphone.mp3" 

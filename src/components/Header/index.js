@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
 import './Header.css';
 
 function Header() {
+    const { theme, toggleTheme } = useTheme();
+
     return (
         <header id="site-header">
             <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/projects">Portfolio</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
-                </ul>
+                <Link to="/">Home</Link>
+                <Link to="/projects">Projects</Link>
+                <Link to="/contact">Contact</Link>
             </nav>
+            <button className="theme-toggle" onClick={toggleTheme}>
+                {theme === 'light' ? '🌙' : '☀️'}
+            </button>
         </header>
     );
 }

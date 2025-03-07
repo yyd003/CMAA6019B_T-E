@@ -1,0 +1,42 @@
+/* 全局主题变量 */
+:root {
+    /* 默认亮色主题变量 */
+    --bg-color: #ffffff;
+    --text-color: #121212;
+    --card-bg: rgba(0, 0, 0, 0.1);
+    --hover-bg: rgba(0, 0, 0, 0.2);
+    --sidebar-bg: #f5f5f5;
+    --sidebar-text: #333;
+    --sidebar-border: #ddd;
+    --header-footer-bg: #282c34;
+    --header-footer-text: white;
+    --link-color: #66b3ff;
+    --link-hover: #99ccff;
+    --button-bg: #4a90e2;
+    --button-hover: #357ab8;
+    --button-text: white;
+    --input-bg: white;
+    --input-text: #333;
+    --input-border: #ddd;
+}
+
+/* 暗色主题变量 */
+[data-theme='dark'] {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --hover-bg: rgba(255, 255, 255, 0.2);
+    --sidebar-bg: #1e1e1e;
+    --sidebar-text: #e0e0e0;
+    --sidebar-border: #333;
+    --header-footer-bg: #1a1a1a;
+    --header-footer-text: #e0e0e0;
+    --link-color: #90caf9;
+    --link-hover: #bbdefb;
+    --button-bg: #3d7ebd;
+    --button-hover: #2c5d8d;
+    --button-text: white;
+    --input-bg: #2c2c2c;
+    --input-text: #e0e0e0;
+    --input-border: #444;
+}

@@ -21,3 +21,31 @@
     color: white;
     text-decoration: none;
 }
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    color: var(--header-footer-text);
+    margin-left: auto;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
