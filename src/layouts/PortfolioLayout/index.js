@@ -1,0 +1,42 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Sidebar from '../../components/Sidebar';
+import Home from '../../pages/Home';
+import Projects from '../../pages/Projects';
+import Contact from '../../pages/Contact';
+import ReactDemo from '../../pages/ProjectPages/ReactDemo';
+import Degas from '../../pages/ProjectPages/Degas';
+import CoursePlatform from '../../features/CoursePlatform';
+import './PortfolioLayout.css';
+
+function PortfolioLayout() {
+  return (
+    <div className="portfolio-container">
+      <Sidebar />
+      <div className="main-wrapper">
+        <Header />
+        <main id="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/react-demo" element={<ReactDemo />} />
+            <Route path="/projects/degas" element={<Degas />} />
+            <Route path="/projects/course-platform" element={<CoursePlatform />} />
+            <Route path="/projects/coming-soon" element={
+              <section>
+                <h2>Coming Soon</h2>
+                <p>More exciting projects are on the way. Stay tuned!</p>
+              </section>
+            } />
+            <Route path="/contact" element={<Contact />} />  {}
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+export default PortfolioLayout;

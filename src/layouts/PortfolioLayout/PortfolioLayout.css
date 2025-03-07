@@ -1,0 +1,28 @@
+.portfolio-container {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+#site-header {
+    width: 100%;
+    background-color: #282c34;
+    padding: 1%;  /* 改为百分比 */
+    color: white;
+}
+
+#site-footer {
+    width: 100%;
+    background-color: #282c34;
+    padding: 1%;  /* 改为百分比 */
+    color: white;
+    margin-top: auto;
+}

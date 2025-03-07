@@ -1,0 +1,23 @@
+/* Header Styles */
+#site-header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+#site-header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+#site-header nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+#site-header nav ul li a {
+    color: white;
+    text-decoration: none;
+}

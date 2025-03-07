@@ -1,0 +1,14 @@
+.featured-courses {
+  margin: 20px 0;
+}
+
+.system-notices {
+  margin: 20px 0;
+}
+
+.notice {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

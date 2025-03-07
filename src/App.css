@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #1a237e 0%,
+        #0d47a1 50%,
+        #01579b 100%
+    );
+    background-attachment: fixed;
+    color: #ffffff;
+}
+
+/* 调整所有section的背景，使内容更易读 */
+section {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* 调整链接颜色，使其在深色背景上更易读 */
+a {
+    color: #66b3ff;
+}
+
+a:hover {
+    color: #99ccff;
+}
