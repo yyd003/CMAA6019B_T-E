@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 // 修改导入路径，从Projects组件导入项目数据
 import { projectsList } from '../Projects';
-// 移除 useTheme 导入，因为我们不再需要它
-// import { useTheme } from '../../contexts/ThemeContext';
 import useClickPosition from '../../hooks/useClickPosition';
+// 导入自定义 Hook
+import useRenderTime from '../../hooks/useRenderTime';
 
 function Home() {
     // 移除未使用的 theme 和 toggleTheme
-    // const { theme, toggleTheme } = useTheme();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -18,6 +17,13 @@ function Home() {
     // 添加监听状态和引用
     const [hoveredElement, setHoveredElement] = useState(null);
     const homeContainerRef = useRef(null);
+
+    // 使用自定义 Hook 测量整个 Home 组件的渲染时间
+    const homeRenderTime = useRenderTime('Home', []);
+    
+    // 使用自定义 Hook 测量 Hero 部分的渲染时间
+    const heroRef = useRef(null);
+    const heroRenderTime = useRenderTime('Hero Section', []);
 
     // Use our custom hook for different sections
     const heroSection = useClickPosition('Hero Section');
@@ -110,7 +116,11 @@ function Home() {
 
     return (
         <div className="home-container" ref={homeContainerRef}>
-            <section className="hero" ref={heroSection.ref}>
+            <div className="performance-metrics" style={{ padding: '10px', fontSize: '0.8rem', color: '#666', backgroundColor: 'rgba(0,0,0,0.05)', marginBottom: '10px', borderRadius: '4px' }}>
+                <p>Home component render time: {homeRenderTime}ms</p>
+            </div>
+            
+            <section className="hero" ref={(el) => { heroSection.ref.current = el; heroRef.current = el; }}>
                 <audio 
                     src="/audio/j.fla-Payphone.mp3" 
                     autoPlay 
@@ -121,6 +131,9 @@ function Home() {
                 <p className="click-info">
                     Last click in Hero: X: {Math.round(heroSection.clickPosition.x)}, 
                     Y: {Math.round(heroSection.clickPosition.y)}
+                </p>
+                <p className="performance-info" style={{ fontSize: '0.8rem', color: '#666' }}>
+                    Hero component render time: {heroRenderTime}ms
                 </p>
             </section>
 
