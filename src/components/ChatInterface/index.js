@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './ChatInterface.css';
 
 function ChatInterface() {
@@ -6,14 +6,30 @@ function ChatInterface() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadTime, setLoadTime] = useState(null);
+  
+  // 使用 useEffect 记录组件渲染和加载时间
+  useEffect(() => {
+    const startTime = performance.now();
+    console.log('ChatInterface component rendering started');
+    
+    // 使用 requestAnimationFrame 确保在渲染完成后测量时间
+    requestAnimationFrame(() => {
+      const endTime = performance.now();
+      const timeElapsed = endTime - startTime;
+      setLoadTime(timeElapsed.toFixed(2));
+      console.log(`ChatInterface component rendering completed, time: ${timeElapsed.toFixed(2)}ms`);
+    });
+  }, []);
 
-  // 发送消息到后端并获取响应
-  const sendMessage = async () => {
+  // 使用 useCallback 优化 sendMessage 函数
+  const sendMessage = useCallback(async () => {
+    console.log('sendMessage function created');
     // 检查输入是否为空
     if (input.trim() === '') return;
     
     // 添加用户消息到对话历史
-    setMessages([...messages, { type: 'user', content: input }]);
+    setMessages(prevMessages => [...prevMessages, { type: 'user', content: input }]);
     
     // 设置加载状态
     setLoading(true);
@@ -46,107 +62,48 @@ function ChatInterface() {
       setLoading(false);
       setInput('');
     }
-  };
+  }, [input]); // 只依赖于 input
 
   // 处理按Enter键发送消息
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter' && !loading) {
       sendMessage();
     }
-  };
+  }, [sendMessage, loading]);
 
   return (
-    <div style={styles.chatInterface}>
-      <div style={styles.chatHistory}>
+    <div className="chat-interface">
+      {loadTime && (
+        <div className="performance-info" style={{ fontSize: '0.8rem', color: '#666', marginBottom: '10px' }}>
+          Component load time: {loadTime}ms
+        </div>
+      )}
+      <div className="chat-history">
         {messages.map((message, index) => (
-          <div key={index} style={{...styles.message, ...(message.type === 'user' ? styles.userMessage : styles.aiMessage)}}>
-            <span style={styles.messageLabel}>
+          <div key={index} className={`message ${message.type === 'user' ? 'user-message' : 'ai-message'}`}>
+            <span className="message-label">
               {message.type === 'user' ? 'user' : 'ai'}:
             </span>
             {message.content}
           </div>
         ))}
       </div>
-      <div style={styles.inputArea}>
+      <div className="input-area">
         <input 
           type="text" 
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Send your message about HKUST(GZ)"
-          style={styles.chatInput}
+          className="chat-input"
           disabled={loading}
         />
-        <button onClick={sendMessage} disabled={loading} style={styles.chatButton}>
+        <button onClick={sendMessage} disabled={loading} className="chat-button">
           {loading ? '⏳' : '📤'}
         </button>
       </div>
     </div>
   );
 }
-
-// 内联样式
-const styles = {
-  chatInterface: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '500px',
-    width: '100%',
-    maxWidth: '800px',
-    margin: '0 auto',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    overflow: 'hidden',
-  },
-  chatHistory: {
-    flex: 1,
-    padding: '20px',
-    overflowY: 'auto',
-    backgroundColor: '#f9f9f9',
-  },
-  message: {
-    margin: '10px 0',
-    padding: '10px 15px',
-    borderRadius: '18px',
-    maxWidth: '80%',
-    wordWrap: 'break-word',
-  },
-  userMessage: {
-    backgroundColor: '#e3f2fd',
-    marginLeft: 'auto',
-    textAlign: 'right',
-  },
-  aiMessage: {
-    backgroundColor: '#f1f0f0',
-    marginRight: 'auto',
-  },
-  messageLabel: {
-    fontWeight: 'bold',
-    marginRight: '8px',
-  },
-  inputArea: {
-    display: 'flex',
-    padding: '10px',
-    backgroundColor: '#fff',
-    borderTop: '1px solid #ddd',
-  },
-  chatInput: {
-    flex: 1,
-    padding: '10px 15px',
-    border: '1px solid #ddd',
-    borderRadius: '20px',
-    marginRight: '10px',
-    fontSize: '16px',
-  },
-  chatButton: {
-    padding: '10px 15px',
-    backgroundColor: '#2196f3',
-    color: 'white',
-    border: 'none',
-    borderRadius: '20px',
-    cursor: 'pointer',
-    fontSize: '16px',
-  }
-};
 
 export default ChatInterface;

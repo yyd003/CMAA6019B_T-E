@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -9,10 +9,21 @@ import Contact from '../../pages/Contact';
 import ReactDemo from '../../pages/ProjectPages/ReactDemo';
 import Degas from '../../pages/ProjectPages/Degas';
 import CoursePlatform from '../../features/CoursePlatform';
-import ChatbotDemo from '../../pages/ProjectPages/ChatbotDemo';
 import GalleryPage from '../../pages/Gallery';
 import './PortfolioLayout.css';
 import { useFontSize } from '../../contexts/FontSizeContext';
+
+// 懒加载组件
+const ChatbotDemo = lazy(() => import('../../pages/ProjectPages/ChatbotDemo'));
+const HooksDemo = lazy(() => import('../../pages/ProjectPages/HooksDemo'));
+
+// 加载状态组件
+const LoadingComponent = () => (
+  <div className="loading-container">
+    <p>Loading page...</p>
+    <div className="loading-spinner"></div>
+  </div>
+);
 
 function PortfolioLayout() {
   const { fontSize } = useFontSize();
@@ -30,7 +41,16 @@ function PortfolioLayout() {
             <Route path="/projects/react-demo" element={<ReactDemo />} />
             <Route path="/projects/degas" element={<Degas />} />
             <Route path="/projects/course-platform" element={<CoursePlatform />} />
-            <Route path="/projects/chatbot-demo" element={<ChatbotDemo />} />
+            <Route path="/projects/chatbot-demo" element={
+              <Suspense fallback={<LoadingComponent />}>
+                <ChatbotDemo />
+              </Suspense>
+            } />
+            <Route path="/projects/hooks-demo" element={
+              <Suspense fallback={<LoadingComponent />}>
+                <HooksDemo />
+              </Suspense>
+            } />
             <Route path="/projects/coming-soon" element={
               <section>
                 <h2>Coming Soon</h2>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // 将项目数据移到这里作为统一数据源
@@ -12,6 +12,16 @@ export const projectsList = [
         description: "A deep learning project focused on computer vision and artificial intelligence.",
         fullDescription: "DEGAS (Deep Learning Enhanced Graphics and Analysis System) is an innovative project that combines state-of-the-art deep learning techniques with practical applications in computer vision. This project demonstrates the power of AI in solving complex visual recognition tasks.",
         sourceLink: "https://initialneil.github.io/DEGAS"
+    },
+    { 
+        path: "/projects/hooks-demo", 
+        name: "React Hooks Demo", 
+        desc: "useCallback & useMemo",
+        author: "Yao-Dong Yang",
+        image: "/img/bg.jpg",
+        description: "A demonstration of React performance optimization hooks.",
+        fullDescription: "This demo showcases the power of React's useCallback and useMemo hooks for performance optimization. It includes practical examples of how these hooks can prevent unnecessary re-renders and expensive calculations in your React applications.",
+        sourceLink: null
     },
     { 
         path: "/projects/react-demo", 
@@ -57,15 +67,47 @@ export const projectsList = [
 
 const Projects = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [renderTime, setRenderTime] = useState(0);
     
-    const filteredProjects = projectsList.filter(project => 
-        project.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // 使用 useEffect 记录组件渲染和测量渲染时间
+    useEffect(() => {
+        const startTime = performance.now();
+        
+        console.log('Projects 组件渲染');
+        
+        // Use requestAnimationFrame to measure time after render is complete
+        requestAnimationFrame(() => {
+            const endTime = performance.now();
+            const timeElapsed = endTime - startTime;
+            setRenderTime(timeElapsed.toFixed(2));
+            console.log(`Render time: ${timeElapsed.toFixed(2)}ms`);
+        });
+    });
+    
+    // 使用 useMemo 优化项目过滤逻辑
+    // 只有当 searchQuery 变化时，才会重新计算过滤后的项目列表
+    const filteredProjects = useMemo(() => {
+        const filterStart = performance.now();
+        console.log('正在计算过滤后的项目列表');
+        
+        const result = projectsList.filter(project => 
+            project.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        
+        const filterEnd = performance.now();
+        console.log(`Filter calculation time: ${(filterEnd - filterStart).toFixed(2)}ms`);
+        
+        return result;
+    }, [searchQuery]);
 
     return (
         <div className="projects-container">
             <section className="project-list">
                 <h2>Projects</h2>
+                
+                <div className="performance-metrics" style={{ marginBottom: '15px', fontSize: '0.8rem', color: '#666' }}>
+                    <p>Last render time: {renderTime}ms</p>
+                </div>
                 
                 <div className="search-box">
                     <input
