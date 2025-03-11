@@ -6,8 +6,9 @@ import Sidebar from '../../components/Sidebar';
 import Home from '../../pages/Home';
 import Projects from '../../pages/Projects';
 import Contact from '../../pages/Contact';
-import ReactDemo from '../../pages/ProjectPages/ReactDemo';
-import Degas from '../../pages/ProjectPages/Degas';
+// 移除直接导入
+// import ReactDemo from '../../pages/ProjectPages/ReactDemo';
+// import Degas from '../../pages/ProjectPages/Degas';
 import CoursePlatform from '../../features/CoursePlatform';
 import GalleryPage from '../../pages/Gallery';
 import './PortfolioLayout.css';
@@ -16,6 +17,9 @@ import { useFontSize } from '../../contexts/FontSizeContext';
 // 懒加载组件
 const ChatbotDemo = lazy(() => import('../../pages/ProjectPages/ChatbotDemo'));
 const HooksDemo = lazy(() => import('../../pages/ProjectPages/HooksDemo'));
+// 添加新的懒加载组件
+const ReactDemo = lazy(() => import('../../pages/ProjectPages/ReactDemo'));
+const Degas = lazy(() => import('../../pages/ProjectPages/Degas'));
 
 // 加载状态组件
 const LoadingComponent = () => (
@@ -38,8 +42,17 @@ function PortfolioLayout() {
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/projects/react-demo" element={<ReactDemo />} />
-            <Route path="/projects/degas" element={<Degas />} />
+            {/* 修改为懒加载方式 */}
+            <Route path="/projects/react-demo" element={
+              <Suspense fallback={<LoadingComponent />}>
+                <ReactDemo />
+              </Suspense>
+            } />
+            <Route path="/projects/degas" element={
+              <Suspense fallback={<LoadingComponent />}>
+                <Degas />
+              </Suspense>
+            } />
             <Route path="/projects/course-platform" element={<CoursePlatform />} />
             <Route path="/projects/chatbot-demo" element={
               <Suspense fallback={<LoadingComponent />}>
