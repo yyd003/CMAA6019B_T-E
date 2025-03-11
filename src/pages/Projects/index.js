@@ -8,7 +8,7 @@ export const projectsList = [
         name: "DEGAS", 
         desc: "Deep Learning Project",
         author: "Yao-Dong Yang",
-        image: "/img/bg.jpg",
+        image: "/img/DEGAS.png",
         description: "A deep learning project focused on computer vision and artificial intelligence.",
         fullDescription: "DEGAS (Deep Learning Enhanced Graphics and Analysis System) is an innovative project that combines state-of-the-art deep learning techniques with practical applications in computer vision. This project demonstrates the power of AI in solving complex visual recognition tasks.",
         sourceLink: "https://initialneil.github.io/DEGAS"
@@ -18,7 +18,7 @@ export const projectsList = [
         name: "React Hooks Demo", 
         desc: "useCallback & useMemo",
         author: "Yao-Dong Yang",
-        image: "/img/bg.jpg",
+        image: "/img/hook.png",
         description: "A demonstration of React performance optimization hooks.",
         fullDescription: "This demo showcases the power of React's useCallback and useMemo hooks for performance optimization. It includes practical examples of how these hooks can prevent unnecessary re-renders and expensive calculations in your React applications.",
         sourceLink: null
@@ -28,7 +28,7 @@ export const projectsList = [
         name: "Lab 1 React Demo", 
         desc: "Interactive Components",
         author: "Yao-Dong Yang",
-        image: "/img/bg.jpg",
+        image: "/img/react.png",
         description: "A collection of interactive React components.",
         fullDescription: "Showcase of various React components demonstrating modern web development practices and UI/UX patterns.",
         sourceLink: null
@@ -38,7 +38,7 @@ export const projectsList = [
         name: "Lab 2 tourial Course Platform", 
         desc: "Educational System",
         author: "Yao-Dong Yang",
-        image: "/img/bg.jpg",
+        image: "/img/cp.png",
         description: "An online learning platform built with React.",
         fullDescription: "A comprehensive educational platform featuring course management, student tracking, and interactive learning materials.",
         sourceLink: null
@@ -48,7 +48,7 @@ export const projectsList = [
         name: "Lab 5 Chatbot Demo", 
         desc: "AI Conversation Interface",
         author: "Yao-Dong Yang",
-        image: "/img/bg.jpg",
+        image: "/img/chatbot.png",
         description: "An interactive chatbot powered by OpenAI API.",
         fullDescription: "This demo showcases a chatbot interface that connects to a backend OpenAI API, allowing users to interact with large language models directly on the website.",
         sourceLink: null

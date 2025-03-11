@@ -110,7 +110,6 @@ function Home() {
 
     return (
         <div className="home-container" ref={homeContainerRef}>
-            {/* 移除主题切换按钮 */}
             <section className="hero" ref={heroSection.ref}>
                 <audio 
                     src="/audio/j.fla-Payphone.mp3" 
@@ -132,7 +131,7 @@ function Home() {
                     <h3>Technical Skills</h3>
                     <ul>
                         <li>Frontend: React, JavaScript, HTML5, CSS3</li>
-                        <li>Backend: JAVA</li>
+                        <li>Backend: JAVA, Python</li>
                         <li>Others: Git, Docker</li>
                     </ul>
                 </div>
@@ -156,7 +155,13 @@ function Home() {
                     <div className="project-cards">
                         {visibleProjects.map((project, index) => (
                             <div key={index} className="project-card">
-                                <div className="project-card-image"></div>
+                                <div className="project-card-image">
+                                    <img 
+                                        src={project.image || '/img/bg.jpg'} 
+                                        alt={project.name}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    />
+                                </div>
                                 <h3>{project.name}</h3>
                                 <p>{project.desc}</p>
                                 <Link to={project.path}>Learn More</Link>

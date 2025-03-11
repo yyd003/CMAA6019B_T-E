@@ -1,3 +1,33 @@
+# Update Log - Real-time Clock Integration
+# ID: UL-2025-03-11-003
+
+## Files Modified/Created:
+
+1. c:\CMAA6019B_Lab5_Yaodong_Yang\src\pages\Projects\index.js (Modified)
+   - Added real-time clock display to Projects page
+   - Implemented API integration with external time service
+   - Added error handling with local time fallback
+   - Implemented automatic time updates every second
+
+## Requirements Implemented:
+
+1. Real-time clock integration:
+   - Fetched system time from "http://quan.suning.com/getSysTime.do" API
+   - Implemented error handling with local time fallback
+   - Added visual indicator for local time usage
+   - Set up automatic time refresh every second
+
+2. Improved user experience:
+   - Added clear time display in the Projects interface
+   - Ensured continuous time updates without page refresh
+   - Provided graceful degradation when API is unavailable
+   - Maintained consistent UI styling with existing elements
+
+3. Implemented best practices:
+   - Used React hooks for state management and side effects
+   - Added proper cleanup for interval timers
+   - Implemented error handling for network requests
+   - Added console logging for debugging purposes
 
 # Update Log - React Performance Optimization & Lazy Loading
 # ID: UL-2025-03-11-002
