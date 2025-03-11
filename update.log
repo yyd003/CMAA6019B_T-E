@@ -1,4 +1,5 @@
-# Update Log - Chatbot Integration
+# Update Log - Chatbot Integration 
+# ID: UL-2023-11-15-001
 
 ## Files Modified/Created:
 
@@ -22,6 +23,20 @@
 5. c:\CMAA6019B_Lab5_Yaodong_Yang\src\layouts\PortfolioLayout\index.js (Modified)
    - Added import for ChatbotDemo component
    - Added new route for chatbot demo page
+
+6. c:\CMAA6019B_Lab5_Yaodong_Yang\Ref_Backend\config.py (New)
+   - Created configuration file for API keys and sensitive data
+   - Separated sensitive information from main code
+
+7. c:\CMAA6019B_Lab5_Yaodong_Yang\Ref_Backend\config.example.py (New)
+   - Added example configuration template for other developers
+
+8. c:\CMAA6019B_Lab5_Yaodong_Yang\Ref_Backend\chatbot.py (Modified)
+   - Refactored to load API keys from external configuration file
+   - Added error handling for missing configuration
+
+9. c:\CMAA6019B_Lab5_Yaodong_Yang\.gitignore (Modified/New)
+   - Added rules to exclude sensitive configuration files
 
 ## Requirements Implemented:
 
@@ -49,3 +64,9 @@
    - New entry in projects list
    - Dedicated route in application
    - Descriptive project information
+
+6. Improved security practices:
+   - Moved API keys to separate configuration file
+   - Added configuration file to .gitignore
+   - Created example configuration template
+   - Added documentation for secure setup
