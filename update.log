@@ -1,0 +1,51 @@
+# Update Log - Chatbot Integration
+
+## Files Modified/Created:
+
+1. c:\CMAA6019B_Lab5_Yaodong_Yang\src\components\ChatInterface\index.js (New)
+   - Created new component for chat interface
+   - Implemented message history management
+   - Added fetch API integration with backend
+   - Implemented loading states and error handling
+
+2. c:\CMAA6019B_Lab5_Yaodong_Yang\src\components\ChatInterface\ChatInterface.css (New)
+   - Added basic styling for chat interface
+
+3. c:\CMAA6019B_Lab5_Yaodong_Yang\src\pages\ProjectPages\ChatbotDemo\index.js (New)
+   - Created new page component to showcase the chatbot
+   - Added technical details and documentation
+
+4. c:\CMAA6019B_Lab5_Yaodong_Yang\src\pages\Projects\index.js (Modified)
+   - Added new chatbot project to the projects list
+   - Updated project description and metadata
+
+5. c:\CMAA6019B_Lab5_Yaodong_Yang\src\layouts\PortfolioLayout\index.js (Modified)
+   - Added import for ChatbotDemo component
+   - Added new route for chatbot demo page
+
+## Requirements Implemented:
+
+1. Created a chatbot interface component with:
+   - Message history display
+   - User input handling
+   - Visual distinction between user and AI messages
+
+2. Implemented Fetch API integration:
+   - POST requests to backend API
+   - JSON data formatting
+   - Error handling for network issues
+
+3. Added state management using React hooks:
+   - useState for message history
+   - useState for user input
+   - useState for loading state
+
+4. Implemented user experience features:
+   - Loading indicators
+   - Enter key support for sending messages
+   - Disabled inputs during loading
+
+5. Added the chatbot demo to project navigation:
+   - New entry in projects list
+   - Dedicated route in application
+   - Descriptive project information

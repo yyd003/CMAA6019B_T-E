@@ -34,6 +34,16 @@ export const projectsList = [
         sourceLink: null
     },
     { 
+        path: "/projects/chatbot-demo", 
+        name: "Lab 5 Chatbot Demo", 
+        desc: "AI Conversation Interface",
+        author: "Yao-Dong Yang",
+        image: "/img/bg.jpg",
+        description: "An interactive chatbot powered by OpenAI API.",
+        fullDescription: "This demo showcases a chatbot interface that connects to a backend OpenAI API, allowing users to interact with large language models directly on the website.",
+        sourceLink: null
+    },
+    { 
         path: "/projects/coming-soon", 
         name: "To Be Continued", 
         desc: "More Coming Soon",

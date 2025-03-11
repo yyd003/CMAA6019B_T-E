@@ -9,6 +9,7 @@ import Contact from '../../pages/Contact';
 import ReactDemo from '../../pages/ProjectPages/ReactDemo';
 import Degas from '../../pages/ProjectPages/Degas';
 import CoursePlatform from '../../features/CoursePlatform';
+import ChatbotDemo from '../../pages/ProjectPages/ChatbotDemo';
 import GalleryPage from '../../pages/Gallery';
 import './PortfolioLayout.css';
 import { useFontSize } from '../../contexts/FontSizeContext';
@@ -29,6 +30,7 @@ function PortfolioLayout() {
             <Route path="/projects/react-demo" element={<ReactDemo />} />
             <Route path="/projects/degas" element={<Degas />} />
             <Route path="/projects/course-platform" element={<CoursePlatform />} />
+            <Route path="/projects/chatbot-demo" element={<ChatbotDemo />} />
             <Route path="/projects/coming-soon" element={
               <section>
                 <h2>Coming Soon</h2>
