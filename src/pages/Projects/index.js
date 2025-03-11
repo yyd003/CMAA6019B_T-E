@@ -68,6 +68,45 @@ export const projectsList = [
 const Projects = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [renderTime, setRenderTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState('');
+    const [isLocalTime, setIsLocalTime] = useState(false);
+    
+    // 获取系统时间的函数
+    const fetchSystemTime = async () => {
+        try {
+            const response = await fetch('http://quan.suning.com/getSysTime.do');
+            const data = await response.json();
+            setCurrentTime(data.sysTime2);
+            setIsLocalTime(false);
+        } catch (error) {
+            console.error('获取系统时间失败:', error);
+            // 使用本地时间作为备选
+            const localTime = new Date().toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            setCurrentTime(localTime);
+            setIsLocalTime(true);
+        }
+    };
+
+    // 初始化时获取系统时间并设置定时器每秒更新
+    useEffect(() => {
+        fetchSystemTime();
+        
+        // 设置定时器每秒更新时间
+        const timeInterval = setInterval(() => {
+            fetchSystemTime();
+        }, 1000);
+        
+        // 组件卸载时清除定时器
+        return () => clearInterval(timeInterval);
+    }, []);
     
     // 使用 useEffect 记录组件渲染和测量渲染时间
     useEffect(() => {
@@ -104,6 +143,10 @@ const Projects = () => {
         <div className="projects-container">
             <section className="project-list">
                 <h2>Projects</h2>
+                
+                <div className="time-display" style={{ marginBottom: '15px', fontSize: '0.9rem', color: '#333' }}>
+                    <p>CurrentTime: {currentTime} {isLocalTime ? '(Local)' : ''}</p>
+                </div>
                 
                 <div className="performance-metrics" style={{ marginBottom: '15px', fontSize: '0.8rem', color: '#666' }}>
                     <p>Last render time: {renderTime}ms</p>
